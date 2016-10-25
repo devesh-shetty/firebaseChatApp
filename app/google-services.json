@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "959336562587",
+    "firebase_url": "https://ping-a4328.firebaseio.com",
+    "project_id": "ping-a4328",
+    "storage_bucket": "ping-a4328.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959336562587:android:a3ae5d34f8a60a40",
+        "android_client_info": {
+          "package_name": "chat.test.com.ping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959336562587-vve7662tjgfipjp85t8kn2mpr9bgutg3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "chat.test.com.ping",
+            "certificate_hash": "3C452C361D54EB3A1686CA4086C55F56931D2AB3"
+          }
+        },
+        {
+          "client_id": "959336562587-i350evor4ha7q3lisa11sovpo1u3hdcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl2mWDHX50F5wAHKbE7WbDehy5IidzNq4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959336562587-i350evor4ha7q3lisa11sovpo1u3hdcu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
