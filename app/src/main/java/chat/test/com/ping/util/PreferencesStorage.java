@@ -13,6 +13,9 @@ public class PreferencesStorage
     //the key associated with a user's username
     public static final String USERNAME = "USERNAME";
 
+    //the key associated with a user's id
+    public static final String USER_ID = "USER_ID";
+
     private static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
