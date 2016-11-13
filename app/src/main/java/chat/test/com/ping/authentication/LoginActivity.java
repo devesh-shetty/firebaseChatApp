@@ -15,11 +15,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Random;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import chat.test.com.ping.R;
-import chat.test.com.ping.message.MessageActivity;
+import chat.test.com.ping.message.UserActivity;
 import chat.test.com.ping.model.PingUser;
 import chat.test.com.ping.util.Constants;
 import chat.test.com.ping.util.PreferencesStorage;
@@ -55,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if(userId != null){
             //no need to show the login/signup screen again
-            Intent intent = new Intent(mContext, MessageActivity.class);
+            Intent intent = new Intent(mContext, UserActivity.class);
             startActivity(intent);
             finish();
         }
@@ -64,14 +66,15 @@ public class LoginActivity extends AppCompatActivity {
         mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
 
-            if(user != null){
+            if(user != null)
+            {
                 //User has logged in
-                Intent intent = new Intent(mContext, MessageActivity.class);
+                Intent intent = new Intent(mContext, UserActivity.class);
                 startActivity(intent);
                 finish();
-            }else{
-
-                //User has logged out
+            }else
+            {
+                 //User has logged out
                 PreferencesStorage.clearData(mContext);
 
             }
@@ -87,7 +90,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onButtonClick(View view){
         Log.d(TAG, "Button clicked");
         String userInfo[] = getUserInfo();
-        if(userInfo == null){
+        if(userInfo == null)
+        {
             return;
         }
 
@@ -100,7 +104,8 @@ public class LoginActivity extends AppCompatActivity {
 
         int id = view.getId();
 
-        switch (id){
+        switch (id)
+        {
             case R.id.btn_login:
                 mFirebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, (task)->{
@@ -116,12 +121,32 @@ public class LoginActivity extends AppCompatActivity {
                 mFirebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, (task)->{
 
-                            if(!task.isSuccessful()){
+                            if(!task.isSuccessful())
+                            {
                                 Toast.makeText(mContext, R.string.signup_failed, Toast.LENGTH_LONG).show();
-                            }else{
+                            }else
+                            {
                                 //get the auto-generated key to the child location
                                 String userId = pingUsersReference.push().getKey();
-                                PingUser user = new PingUser(userId, email, null);
+                                StringBuilder username = new StringBuilder();
+                                Random random = new Random();
+                                //Every user will get  a randomly generated username
+                                for(int i = 0; i < 6; i++)
+                                {
+                                    username.append((char)(random.nextInt(26) + 'a'));
+                                }
+
+                                for(int i = 0; i < 3; i++)
+                                {
+                                    username.append(random.nextInt(10));
+                                }
+
+                                PingUser user = new PingUser.Builder()
+                                                    .setUserId(userId)
+                                                    .setUsername(username.toString())
+                                                    .setEmailId(email)
+                                                    .build();
+
                                 //store the user object at the child key location
                                 pingUsersReference.child(userId).setValue(user);
 
@@ -149,7 +174,8 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.show();
 
         String email = mETEmail.getText().toString().trim();
-        if(!Validation.isValidEmail(email)){
+        if(!Validation.isValidEmail(email))
+        {
             mETEmail.setText("");
             mETEmail.requestFocus();
             mETEmail.setHint(R.string.incorrect_email);
@@ -158,7 +184,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         String password = mETPassword.getText().toString().trim();
-        if(!Validation.checkPassword(password)){
+        if(!Validation.checkPassword(password))
+        {
             mETPassword.setText("");
             mETPassword.requestFocus();
             mETPassword.setHint(R.string.incorrect_password);
@@ -178,7 +205,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
+        if (mAuthListener != null)
+        {
             mFirebaseAuth.removeAuthStateListener(mAuthListener);
         }
     }

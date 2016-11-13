@@ -6,7 +6,7 @@ import android.util.Patterns;
  * This class contains utility methods to validate various input data
  * @author Devesh Shetty
  */
-public class Validation {
+final public class Validation {
 
     /**
      * Validates whether the supplied string is a valid email id or not

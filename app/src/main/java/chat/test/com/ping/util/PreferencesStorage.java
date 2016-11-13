@@ -8,7 +8,7 @@ import android.preference.PreferenceManager;
  * A sharedPreferences implementation to facilitate easy use of SharedPreferences with utility methods to save, get and delete data
  * @author Devesh Shetty
  */
-public class PreferencesStorage
+final public class PreferencesStorage
 {
     //the key associated with a user's username
     public static final String USERNAME = "USERNAME";
